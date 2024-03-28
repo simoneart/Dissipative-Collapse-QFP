@@ -31,3 +31,15 @@ D4/d**2*((f_of_t(t-1,j1+1,j2,j3,j4,j5,j6) - 2*f_of_t(t-1,j1,j2,j3,j4,j5,j6) + f_
 4*f_of_t(t-1,j1,j2,j3,j4,j5,j6) -2*f_of_t(t-1,j1,j2-2,j3,j4,j5,j6) + f_of_t(t-1,j1,j2+2,j3,j4,j5-2,j6) -2*f_of_t(t-1,j1,j2,j3,j4,j5-2,j6) + f_of_t(t-1,j1,j2-2,j3,j4,j5-2,j6)) + &
 3*D2*(f_of_t(t-1,j1,j2,j3+2,j4,j5,j6+2) - 2*f_of_t(t-1,j1,j2,j3,j4,j5,j6+2) + f_of_t(t-1,j1,j2,j3-2,j4,j5,j6+2) -2*f_of_t(t-1,j1,j2,j3+2,j4,j5,j6) + &
 4*f_of_t(t-1,j1,j2,j3,j4,j5,j6) -2*f_of_t(t-1,j1,j2,j3-2,j4,j5,j6) + f_of_t(t-1,j1,j2,j3+2,j4,j5,j6-2) -2*f_of_t(t-1,j1,j2,j3,j4,j5,j6-2) + f_of_t(t-1,j1,j2,j3-2,j4,j5,j6-2)))/16.0/d**4 + &
+(D2*(f_of_t(t-1,j1+2,j2,j3,j4,j5+2,j6) - 2*f_of_t(t-1,j1,j2,j3,j4,j5+2,j6) + f_of_t(t-1,j1-2,j2,j3,j4,j5+2,j6) -2*f_of_t(t-1,j1+2,j2,j3,j4,j5,j6) +&
+4*f_of_t(t-1,j1,j2,j3,j4,j5,j6) -2*f_of_t(t-1,j1-2,j2,j3,j4,j5,j6) + f_of_t(t-1,j1+2,j2,j3,j4,j5-2,j6) -2*f_of_t(t-1,j1,j2,j3,j4,j5-2,j6) + f_of_t(t-1,j1-2,j2,j3,j4,j5-2,j6)) + &
+D2*(f_of_t(t-1,j1+2,j2,j3,j4,j5,j6+2) - 2*f_of_t(t-1,j1,j2,j3,j4,j5,j6+2) + f_of_t(t-1,j1-2,j2,j3,j4,j5,j6+2) -2*f_of_t(t-1,j1+2,j2,j3,j4,j5,j6) +&
+4*f_of_t(t-1,j1,j2,j3,j4,j5,j6) -2*f_of_t(t-1,j1-2,j2,j3,j4,j5,j6) + f_of_t(t-1,j1+2,j2,j3,j4,j5,j6-2) -2*f_of_t(t-1,j1,j2,j3,j4,j5,j6-2) + f_of_t(t-1,j1-2,j2,j3,j4,j5,j6-2)) + &
+D2*(f_of_t(t-1,j1,j2+2,j3,j4,j5,j6+2) - 2*f_of_t(t-1,j1,j2,j3,j4,j5,j6+2) + f_of_t(t-1,j1,j2-2,j3,j4,j5,j6+2) -2*f_of_t(t-1,j1,j2+2,j3,j4,j5,j6) +&
+4*f_of_t(t-1,j1,j2,j3,j4,j5,j6) -2*f_of_t(t-1,j1,j2-2,j3,j4,j5,j6) + f_of_t(t-1,j1,j2+2,j3,j4,j5,j6-2) -2*f_of_t(t-1,j1,j2,j3,j4,j5,j6-2) + f_of_t(t-1,j1,j2-2,j3,j4,j5,j6-2)) + &
+D2*(f_of_t(t-1,j1,j2+2,j3,j4+2,j5,j6) - 2*f_of_t(t-1,j1,j2,j3,j4+2,j5,j6) + f_of_t(t-1,j1,j2-2,j3,j4+2,j5,j6) -2*f_of_t(t-1,j1,j2+2,j3,j4,j5,j6) +&
+4*f_of_t(t-1,j1,j2,j3,j4,j5,j6) -2*f_of_t(t-1,j1,j2-2,j3,j4,j5,j6) + f_of_t(t-1,j1,j2+2,j3,j4-2,j5,j6) -2*f_of_t(t-1,j1,j2,j3,j4-2,j5,j6) + f_of_t(t-1,j1,j2-2,j3,j4-2,j5,j6)) + &
+D2*(f_of_t(t-1,j1,j2,j3+2,j4+2,j5,j6) - 2*f_of_t(t-1,j1,j2,j3,j4+2,j5,j6) + f_of_t(t-1,j1,j2,j3-2,j4+2,j5,j6) -2*f_of_t(t-1,j1,j2,j3+2,j4,j5,j6) +&
+4*f_of_t(t-1,j1,j2,j3,j4,j5,j6) -2*f_of_t(t-1,j1,j2,j3-2,j4,j5,j6) + f_of_t(t-1,j1,j2,j3+2,j4-2,j5,j6) -2*f_of_t(t-1,j1,j2,j3,j4-2,j5,j6) + f_of_t(t-1,j1,j2,j3-2,j4-2,j5,j6)) + &
+D2*(f_of_t(t-1,j1,j2,j3+2,j4,j5+2,j6) - 2*f_of_t(t-1,j1,j2,j3,j4,j5+2,j6) + f_of_t(t-1,j1,j2,j3-2,j4,j5+2,j6) -2*f_of_t(t-1,j1,j2,j3+2,j4,j5,j6) +&
+4*f_of_t(t-1,j1,j2,j3,j4,j5,j6) -2*f_of_t(t-1,j1,j2,j3-2,j4,j5,j6) + f_of_t(t-1,j1,j2,j3+2,j4,j5-2,j6) -2*f_of_t(t-1,j1,j2,j3,j4,j5-2,j6) + f_of_t(t-1,j1,j2,j3-2,j4,j5-2,j6)))/16.0/d**4 + &
