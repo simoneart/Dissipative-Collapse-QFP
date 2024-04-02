@@ -2,12 +2,12 @@ import numpy as np
 
 '''INITIALIZING THE PARAMETERS'''
 
-m = 1.
-R0 = 1.
-gamma = 1.
-hbar = 1. # 1.0545718e-34
+m = np.float64(1.)
+R0 = np.float64(1.)
+gamma = np.float64(1.)
+hbar = np.float64(1.) # 1.0545718e-34
 
-beta = 1. #temperature of the noise
+beta = np.float64(1.) #temperature of the noise
 betac = 8.*m*R0**2/hbar**2 #critical value of the inverse temperature
                            #damping dominates as long as beta>betac (to verify)
 
@@ -19,37 +19,9 @@ D4 = hbar**2*D3
 f = 3.*hbar**4*beta**2*gamma*np.sqrt(np.pi)/64./R0**5 + \
     hbar**2*gamma*beta*m*np.sqrt(np.pi)/4./R0**3
 
-
-'''DYNAMICS SOLVER'''
-
-def dyn(IC,Grd,timeAxis,dx,dt):
-    
-    #phase-space grid
-    q_grid = Grd[0]
-    p_grid = Grd[1]
-    
-    wt = np.zeros((len(timeAxis), len(q_grid), len(p_grid)))
-    wt[0] = IC
-    
-    #the parameters for the 1D case are still missing so it wont work
-    for t in range(1,len(timeAxis)):
-        for i in range(2,len(q_grid)-2):
-            for j in range(2,len(p_grid)-2): 
-                wt[t,i,j] = wt[t-1,i,j]*(1.-dt/dx*(m*w**2*q_grid[i] + p_grid[j]*\
-                (-1./m-f+4*D3+2.*D3*p_grid[j]/dx)-2*D3+2*(D1+D2)/dx+f*dx-D4/4./dx**3))+\
-                wt[t-1,i,j+1]*dt/dx*(m*w**2*q_grid[i]+D2/dx+p_grid[j]*(4*D3-f+D3*p_grid[j]/dx))+\
-                wt[t-1,i+1,j]*dt/dx*(D1/dx-p_grid[j]/m)+\
-                wt[t-1,i,j-1]*dt/dx**2*(D2+D3*p_grid[j]**2)+\
-                wt[t-1,i-1,j]*dt/dx**2*D1+\
-                +dt*D4/16./dx**4*(wt[t-1,i+2,j+2]-2*wt[t-1,i,j+2]-2*wt[t-1,i,j-2]-\
-                                  2*wt[t-1,i+2,j]-2*wt[t-1,i-2,j]+wt[t-1,i-2,j+2]+wt[t-1,i+2,j-2]+\
-                                  wt[t-1,i-2,j-2])
-    
-    return wt
-
 '''PARAMETERS OF THE HARMONIC OSCILLATOR AND GAUSSIAN WIGNER FUNCTION'''
 
-w = 1. 
+w =  np.float64(1.) 
 q_zpf = np.sqrt(hbar/(2*m*w))
 p_zpf = np.sqrt(hbar*m*w/2)
 
@@ -77,6 +49,37 @@ def gauss_Wf(r,d,V):
     w = 1./(2*np.pi*np.sqrt(np.linalg.det(V)))*np.exp(-(r-d).T@np.linalg.inv(V)@(r-d))
     
     return w
+
+
+
+'''DYNAMICS SOLVER'''
+
+def dyn(IC,Grd,timeAxis,dx,dt):
+    
+    #phase-space grid
+    q_grid = Grd[0]
+    p_grid = Grd[1]
+    
+    wt = np.zeros((len(timeAxis), len(q_grid), len(p_grid)), dtype=np.float64)
+    wt[0] = IC
+    
+    #the parameters for the 1D case are still missing so it wont work
+    for t in range(1,len(timeAxis)):
+        for i in range(2,len(q_grid)-2):
+            for j in range(2,len(p_grid)-2): 
+                wt[t,i,j] = wt[t-1,i,j]*(1.-dt/dx*(m*w**2*q_grid[i] + p_grid[j]*\
+                (-1./m-f+4*D3+2.*D3*p_grid[j]/dx)-2*D3+2*(D1+D2)/dx+f*dx-D4/4./dx**3))+\
+                wt[t-1,i,j+1]*dt/dx*(m*w**2*q_grid[i]+D2/dx+p_grid[j]*(4*D3-f+D3*p_grid[j]/dx))+\
+                wt[t-1,i+1,j]*dt/dx*(D1/dx-p_grid[j]/m)+\
+                wt[t-1,i,j-1]*dt/dx**2*(D2+D3*p_grid[j]**2)+\
+                wt[t-1,i-1,j]*dt/dx**2*D1 #+\
+                #+dt*D4/16./dx**4*(wt[t-1,i+2,j+2]-2*wt[t-1,i,j+2]-2*wt[t-1,i,j-2]-\
+                #                  2*wt[t-1,i+2,j]-2*wt[t-1,i-2,j]+wt[t-1,i-2,j+2]+wt[t-1,i+2,j-2]+\
+                #                  wt[t-1,i-2,j-2])
+    
+    return wt
+
+
 
 '''WIGNER ENTROPY AND ENTROPY PRODUCTION RATE'''
 
