@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from 1D_func import *
+from functions import *
 from matplotlib.ticker import MaxNLocator
 from matplotlib import cm
 import matplotlib.animation as animation
@@ -16,21 +16,24 @@ no_points = 200
 L, R = -2., 2.
 
 #for higher dimensions use a regular grid, no need to define a line for every direction
-q_grid = np.linspace(L, R, no_points)
-p_grid = np.linspace(L, R, no_points)
+q_grid = np.linspace(L, R, no_points, dtype=np.float64)
+p_grid = np.linspace(L, R, no_points, dtype=np.float64)
 Grid = [q_grid, p_grid]
-dx = (R - L)/no_points #the grid is evenly spaced
+dx = np.float64((R - L)/no_points) #the grid is evenly spaced
 
 
 #IC
+var0 = 0.1
 d = np.array([0,0])
-V = np.array([[0.1,0],[0,0.1]])
-w0 = np.array([[gauss_Wf([q,p], d, V) for p in p_grid] for q in q_grid])
+V = np.array([[var0,0],[0,var0]], dtype=np.float64)
+w0 = np.array([[gauss_Wf([q,p], d, V) for p in p_grid] for q in q_grid], dtype=np.float64)
+
+w0 /= np.sum(w0 * dx * dx)
 
 #time grid
-dt = 0.0001
-Num_steps = 500
-times = np.array([k*dt for k in range(Num_steps)])
+dt = np.float64(0.001)
+Num_steps = 1000
+times = np.array([k*dt for k in range(Num_steps)], dtype=np.float64)
 
 print('Starting the dynamics')
 
@@ -53,7 +56,6 @@ plt.grid()
 plt.plot(at, ent_prod)
 plt.xlabel('t')
 plt.ylabel('Entropy production rate')
-
 '''
 
 def plotheatmap(u_k, k):
