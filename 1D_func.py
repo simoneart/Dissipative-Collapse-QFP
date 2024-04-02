@@ -8,6 +8,8 @@ gamma = 1.
 hbar = 1. # 1.0545718e-34
 
 beta = 1. #temperature of the noise
+betac = 8.*m*R0**2/hbar**2 #critical value of the inverse temperature
+                           #damping dominates as long as beta>betac (to verify)
 
 D1 = (hbar**4)*(beta**2)*gamma/(32.*np.sqrt(np.pi)*(R0**3))
 D2 = hbar**2*gamma*m/8./np.sqrt(np.pi)/R0**3 - 3*hbar**3*gamma*beta/64./R0**5 + \
