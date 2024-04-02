@@ -30,7 +30,7 @@ w0 = np.array([[gauss_Wf([q,p], d, V) for p in p_grid] for q in q_grid])
 #time grid
 dt = 0.0001
 Num_steps = 500
-times = np.array([k for k in range(Num_steps)])
+times = np.array([k*dt for k in range(Num_steps)])
 
 print('Starting the dynamics')
 
